@@ -16,18 +16,12 @@
     </head>
     <body>
 
-        @include('partials.header')
-
         <main>
-            <div class="container">
+            <div class="container py-5">
 
                 <div class="row">
 
                     <div class="col">
-
-                        <div class="gatto-bg">
-                            Hello
-                        </div>
 
                         @yield('main-content')
 
@@ -37,8 +31,6 @@
 
             </div>
         </main>
-
-        @include('partials.footer')
 
         {{-- JS da importare nel body --}}
         @yield('body-imports')
