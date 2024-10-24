@@ -21,6 +21,8 @@
             <th scope="col">Type</th>
             <th scope="col">Artists</th>
             <th scope="col">Writers</th>
+            {{-- aggiunta colonna azioni --}}
+            <th scope="col"></th>
           </tr>
         </thead>
 
@@ -37,7 +39,7 @@
                         {{ $item->description}}
                     </td>
                     <td>
-                        {{ $item->thumb}}
+                        <img src="{{ $item->thumb}}" alt="{{ $item->title}}">
                     </td>
                     <td>
                         {{-- formattato il numero con indicazioni riguardo:
@@ -59,6 +61,13 @@
                     </td>
                     <td>
                         {{ $item->writers}}
+                    </td>
+                    {{-- aggiunta sezione per le azioni --}}
+                    <td>
+                        {{-- show, mostra il comic --}}
+                        <a href="{{ route('comics.show', ['comic' => $item->id]) }}" class="btn btn-outline-primary">
+                            Look at me!
+                        </a>
                     </td>
                 </tr>
             @endforeach
