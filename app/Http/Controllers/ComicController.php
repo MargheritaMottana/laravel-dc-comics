@@ -14,7 +14,9 @@ class ComicController extends Controller
      */
     public function index()
     {
-        //
+        $comics = Comic::get();
+        // invio i dati alla pagina index.blade.php nella cartella comics
+        return view('comics.index', compact('comics'));
     }
 
     /**

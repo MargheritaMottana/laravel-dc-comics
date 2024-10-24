@@ -18,7 +18,7 @@ class ComicSeeder extends Seeder
 
         Comic::truncate();
 
-        $comics = config('comic');
+        $comics = config('comics');
 
         // ciclo per leggere e creare tutti i fumetti
         foreach ($comics as $item) {
