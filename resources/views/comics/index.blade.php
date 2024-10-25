@@ -3,9 +3,15 @@
 @section('page-title', 'Comics')
 
 @section('main-content')
-    <h1>
+    <h1 class="mb-5">
         Comics
     </h1>
+
+    <div class="mb-5">
+        <a href="{{ route('comics.create') }}" class="btn btn-outline-success">
+            + Add a comic
+        </a>
+    </div>
 
     <table class="table">
 
