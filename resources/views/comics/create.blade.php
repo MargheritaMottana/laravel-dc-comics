@@ -7,6 +7,19 @@
         Create a new Comic
     </h1>
 
+    {{-- alert per visualizzare tutti gli errori della section, come lista --}}
+    {{-- @if ($errors->any())
+        <div class="alert alert-danger my-4">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>
+                        {{ $error }}
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    @endif --}}
+
     {{-- per accedere a store, il metodo deve essere post --}}
     <form action="{{ route('comics.store') }}" method="POST">
 
@@ -21,6 +34,13 @@
             </label>
             {{-- name in ogni input per salvare il dato --}}
             <input required maxlength="128" name="title" type="text" class="form-control" id="title" placeholder="Write the title...">
+            
+            {{-- errore specifico --}}
+            @error('title')
+                <div class="alert alert-danger my-4">
+                    Title error: {{ $message}}
+                </div>
+            @enderror
         </div>
 
         <div class="mb-3">
@@ -28,7 +48,13 @@
                 Description
                 <span class="text-danger">*</span>
             </label>
-        <textarea required maxlength="4096" name="description" class="form-control" id="description" placeholder="Write the description..."></textarea>
+            <textarea required maxlength="4096" name="description" class="form-control" id="description" placeholder="Write the description..."></textarea>
+            
+            @error('description')
+                <div class="alert alert-danger my-4">
+                    Description error: {{ $message}}
+                </div>
+            @enderror
         </div>
 
         <div class="mb-3">
@@ -37,6 +63,12 @@
                 <span class="text-danger">*</span>
             </label>
             <input required maxlength="64" name="series" type="text" class="form-control" id="series" placeholder="Write the series...">
+        
+            @error('series')
+                <div class="alert alert-danger my-4">
+                    Series error: {{ $message}}
+                </div>
+            @enderror
         </div>
 
         <div class="mb-3">
@@ -50,6 +82,12 @@
                 <option value="graphic novel">Graphic Novel</option>
                 <option value="comic book">Comic Book</option>
             </select>
+
+            @error('type')
+                <div class="alert alert-danger my-4">
+                    Type error: {{ $message}}
+                </div>
+            @enderror
         </div>
 
         <div class="mb-3">
@@ -79,6 +117,20 @@
                 Thumb
             </label>
             <input maxlength="2048" name="thumb" type="text" class="form-control" id="thumb" placeholder="Attach the thumb...">
+        
+            {{-- mostrare più errori --}}
+            @if ($errors->has('thumb'))
+                <div class="alert alert-danger mt-1">
+                    Thumb errors:
+                    <ul class="mb-0">
+                        @foreach ($errors->get('thumb') as $key => $error)
+                            <li>
+                                {{ $error }}
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         </div>
 
         <div class="mb-3">
@@ -87,6 +139,12 @@
                 <span class="text-danger">*</span>
             </label>
             <input required max="999.99" name="price" type="number" class="form-control" id="price" placeholder="Write the price...">
+        
+            @error('price')
+                <div class="alert alert-danger my-4">
+                    Price error: {{ $message}}
+                </div>
+            @enderror
         </div>
 
         <div class="mb-3">

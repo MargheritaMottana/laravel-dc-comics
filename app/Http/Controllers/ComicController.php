@@ -32,7 +32,27 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'title'=> 'required|min:3|max:128|',
+            'description'=> 'required|min:50|max:4096|',
+            'thumb'=> 'nullable|max:2048|url',
+            'price'=> 'required|numeric',
+            'series'=> 'required|min:3|max:64|',
+            'sale_date'=> 'nullable',
+            'type'=> 'required',
+            'artists'=> 'nullable',
+            'writers'=> 'nullable',
+        ]);
+
         $data = $request->all();
+
+        /*
+        Aggiunta controlli:
+            - tutti i campi obbligatori devono essere passati
+            - per i campi stringa, se sono entro i limiti (se obbligatori, altirmenti ok se vuoti)
+            - per i campi numerici, se sono entro i limiti (se obbligatori, altirmenti ok se vuoti)
+        */
 
         $comic = new Comic();
         // prendo i dati da data
@@ -45,7 +65,7 @@ class ComicController extends Controller
         $comic->sale_date = $data['sale_date'];
         $comic->type = $data['type'];
         /*
-        devo trasformare la stringa passata nel form, in un json:
+        Devo trasformare la stringa passata nel form, in un json:
             - lo esplodo (diventa un array)
             - lo codifico (diventa un json)
             - lo salvo
@@ -84,6 +104,19 @@ class ComicController extends Controller
      */
     public function update(Request $request, Comic $comic)
     {
+
+        $request->validate([
+            'title'=> 'required|min:3|max:128|',
+            'description'=> 'required|min:50|max:4096|',
+            'thumb'=> 'nullable|min:100|max:2048|url',
+            'price'=> 'required|numeric',
+            'series'=> 'required|min:3|max:64|',
+            'sale_date'=> 'nullable',
+            'type'=> 'required',
+            'artists'=> 'nullable',
+            'writers'=> 'nullable',
+        ]);
+
         $data = $request->all();
 
         $comic->title = $data['title'];

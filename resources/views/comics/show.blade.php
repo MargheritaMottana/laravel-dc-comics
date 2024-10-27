@@ -10,10 +10,24 @@
             {{ $comic->title }}
         </h1>
 
-        {{-- modifica il comic --}}
-        <a href="{{ route('comics.edit', ['comic' => $comic->id]) }}" class="btn btn-outline-warning text">
-            Edit me!
-        </a>
+        <div>
+            {{-- modifica il comic --}}
+            <a href="{{ route('comics.edit', ['comic' => $comic->id]) }}" class="btn btn-outline-warning text me-3">
+                Edit me!
+            </a>
+
+            {{-- elimina il comic --}}
+            <form 
+                onsubmit="return confirm('Are you sure you want to delete this comic?')"
+                
+                action="{{ route('comics.destroy', ['comic' => $comic->id]) }}" method="POST" class="d-inline-block">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-outline-danger">
+                    Delete me. ):
+                </button>
+            </form>
+        </div>
 
     </div>
 

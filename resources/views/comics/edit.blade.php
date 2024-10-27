@@ -4,7 +4,7 @@
 
 @section('main-content')
     <h1>
-        Edit {{ $comic->title }}
+        Edit "{{ $comic->title }}"
     </h1>
 
     {{-- per accedere a store, il metodo deve essere post --}}
@@ -21,6 +21,14 @@
             </label>
             {{-- Value in ogni campo per prevalorizzare il contenuto --}}
             <input required maxlength="128" name="title" value="{{ $comic->title }}" type="text" class="form-control" id="title" placeholder="Write the title...">
+        
+            {{-- errore specifico --}}
+            @error('title')
+                <div class="alert alert-danger my-4">
+                    Title error: {{ $message}}
+                </div>
+            @enderror
+        
         </div>
 
         <div class="mb-3">
@@ -35,6 +43,12 @@
             class="form-control"
             id="description"
             placeholder="Write the description...">{{ $comic->description }}</textarea>
+
+            @error('description')
+                <div class="alert alert-danger my-4">
+                    Description error: {{ $message}}
+                </div>
+            @enderror
         </div>
 
         <div class="mb-3">
@@ -43,6 +57,13 @@
                 <span class="text-danger">*</span>
             </label>
             <input required maxlength="64" name="series" value="{{ $comic->series }}" type="text" class="form-control" id="series" placeholder="Write the series...">
+        
+            @error('series')
+                <div class="alert alert-danger my-4">
+                    Series error: {{ $message}}
+                </div>
+            @enderror
+
         </div>
 
         <div class="mb-3">
@@ -74,13 +95,21 @@
                     value="comic book">Comic Book
                 </option>
             </select>
+        
+            @error('type')
+                <div class="alert alert-danger my-4">
+                    Type error: {{ $message}}
+                </div>
+            @enderror
+        
         </div>
 
         <div class="mb-3">
             <label for="artists" class="form-label">
                 Artists
             </label>
-            <input name="artists" value="{{ $comic->artists }}" type="text" class="form-control" id="artists" aria-describedby="artists-help" placeholder="Write the artists...">
+            {{-- value decodificato per non trovare ulteriori segni nel campo precompilato --}}
+            <input name="artists" value="{{ implode(',', json_decode($comic->artists)) }}" type="text" class="form-control" id="artists" aria-describedby="artists-help" placeholder="Write the artists...">
 
             <div id="artists-help" class="form-text">
                 Enter artists' names separated by commas
@@ -91,7 +120,7 @@
             <label for="writers" class="form-label">
                 Writers
             </label>
-            <input name="writers" value="{{ $comic->writers }}" type="text" class="form-control" id="writers" aria-describedby="writers-help" placeholder="Write the writers...">
+            <input name="writers" value="{{ implode(',', json_decode($comic->writers)) }}" type="text" class="form-control" id="writers" aria-describedby="writers-help" placeholder="Write the writers...">
 
             <div id="writers-help" class="form-text">
                 Enter writers' names separated by commas
@@ -103,6 +132,21 @@
                 Thumb
             </label>
             <input maxlength="2048" name="thumb" value="{{ $comic->thumb }}" type="text" class="form-control" id="thumb" placeholder="Attach the thumb...">
+        
+            {{-- mostrare più errori --}}
+            @if ($errors->has('thumb'))
+                <div class="alert alert-danger mt-1">
+                    Thumb errors:
+                    <ul class="mb-0">
+                        @foreach ($errors->get('thumb') as $key => $error)
+                            <li>
+                                {{ $error }}
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
         </div>
 
         <div class="mb-3">
@@ -111,6 +155,12 @@
                 <span class="text-danger">*</span>
             </label>
             <input required max="999.99" name="price" value="{{ $comic->price }}" type="number" class="form-control" id="price" placeholder="Write the price...">
+        
+            @error('price')
+                <div class="alert alert-danger my-4">
+                    Price error: {{ $message}}
+                </div>
+            @enderror
         </div>
 
         <div class="mb-3">
