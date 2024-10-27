@@ -96,7 +96,7 @@
             <input name="sale_date" type="date" class="form-control" id="sale_date" placeholder="Write the sale date...">
         </div>
 
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" class="btn btn-success">
             Submit
         </button>
 

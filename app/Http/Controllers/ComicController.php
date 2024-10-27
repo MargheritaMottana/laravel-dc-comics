@@ -76,7 +76,7 @@ class ComicController extends Controller
      */
     public function edit(Comic $comic)
     {
-        //
+        return view('comics.edit', compact('comic'));
     }
 
     /**
@@ -84,7 +84,27 @@ class ComicController extends Controller
      */
     public function update(Request $request, Comic $comic)
     {
-        //
+        $data = $request->all();
+
+        $comic->title = $data['title'];
+        $comic->description = $data['description'];
+        $comic->thumb = $data['thumb'];
+        $priceNumber = floatval($data['price']);
+        $comic->price = $priceNumber;
+        $comic->series = $data['series'];
+        $comic->sale_date = $data['sale_date'];
+        $comic->type = $data['type'];
+        $explodedArtists = explode(',', $data['artists']);
+        $jsonArtists = json_encode($explodedArtists);
+        $comic->artists = $jsonArtists;
+        $explodeWriters = explode(',', $data['writers']);
+        $jsonWriters = json_encode($explodeWriters);
+        $comic->writers = $jsonWriters;
+
+        $comic->save();
+
+        // alla fine dell'operazione, vado alla finestra in cui vedo il comic modificato
+        return redirect()->route('comics.show', ['comic' => $comic->id]);
     }
 
     /**

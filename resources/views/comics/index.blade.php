@@ -74,6 +74,11 @@
                         <a href="{{ route('comics.show', ['comic' => $item->id]) }}" class="btn btn-outline-primary">
                             Look at me!
                         </a>
+
+                        {{-- modifica il comic --}}
+                        <a href="{{ route('comics.edit', ['comic' => $item->id]) }}" class="btn btn-outline-warning">
+                            Edit me!
+                        </a>
                     </td>
                 </tr>
             @endforeach
