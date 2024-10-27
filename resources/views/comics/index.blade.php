@@ -3,6 +3,7 @@
 @section('page-title', 'Comics')
 
 @section('main-content')
+
     <h1 class="mb-5">
         Comics
     </h1>
@@ -33,50 +34,50 @@
         </thead>
 
         <tbody>
-            @foreach ($comics as $item)
+            @foreach ($comics as $comic)
                 <tr>
                     <th scope="row">
-                        {{ $item->id}}
+                        {{ $comic->id}}
                     </th>
                     <td>
-                        {{ $item->title}}
+                        {{ $comic->title}}
                     </td>
                     <td>
-                        {{ $item->description}}
+                        {{ $comic->description}}
                     </td>
                     <td>
-                        <img src="{{ $item->thumb}}" alt="{{ $item->title}}">
+                        <img src="{{ $comic->thumb}}" alt="{{ $comic->title}}">
                     </td>
                     <td>
                         {{-- formattato il numero con indicazioni riguardo:
                         la separazione con virgola e per le migliaia. 
                         La valuta è fuori perché non è salvata nel database --}}
-                        $ {{ number_format($item->price, 2, ',', '.')}}
+                        $ {{ number_format($comic->price, 2, ',', '.')}}
                     </td>
                     <td>
-                        {{ $item->series}}
+                        {{ $comic->series}}
                     </td>
                     <td>
-                        {{ $item->sale_date}}
+                        {{ $comic->sale_date}}
                     </td>
                     <td>
-                        {{ $item->type}}
+                        {{ $comic->type}}
                     </td>
                     <td>
-                        {{ $item->artists}}
+                        {{ $comic->artists}}
                     </td>
                     <td>
-                        {{ $item->writers}}
+                        {{ $comic->writers}}
                     </td>
                     {{-- aggiunta sezione per le azioni --}}
                     <td>
                         {{-- show, mostra il comic --}}
-                        <a href="{{ route('comics.show', ['comic' => $item->id]) }}" class="btn btn-outline-primary">
+                        <a href="{{ route('comics.show', ['comic' => $comic->id]) }}" class="btn btn-outline-primary">
                             Look at me!
                         </a>
 
                         {{-- modifica il comic --}}
-                        <a href="{{ route('comics.edit', ['comic' => $item->id]) }}" class="btn btn-outline-warning">
+                        <a href="{{ route('comics.edit', ['comic' => $comic->id]) }}" class="btn btn-outline-warning">
                             Edit me!
                         </a>
                     </td>

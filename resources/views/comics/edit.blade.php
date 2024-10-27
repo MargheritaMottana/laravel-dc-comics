@@ -124,6 +124,11 @@
             Submit
         </button>
 
+        {{-- "bottone" per annullare l'operazione --}}
+        <a href="{{ route('comics.show', ['comic'=> $comic->id] ) }}" class="btn btn-primary">
+            Cancel
+        </a>
+
     </form>
 
 @endsection

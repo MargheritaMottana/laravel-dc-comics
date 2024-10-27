@@ -3,9 +3,19 @@
 @section('page-title', $comic->title)
 
 @section('main-content')
-    <h1 class="mb-5">
-        {{ $comic->title }}
-    </h1>
+
+    <div class="d-flex justify-content-between align-items-center mb-5">
+
+        <h1>
+            {{ $comic->title }}
+        </h1>
+
+        {{-- modifica il comic --}}
+        <a href="{{ route('comics.edit', ['comic' => $comic->id]) }}" class="btn btn-outline-warning text">
+            Edit me!
+        </a>
+
+    </div>
 
     <div class="card">
 
