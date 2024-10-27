@@ -73,13 +73,26 @@
                     <td>
                         {{-- show, mostra il comic --}}
                         <a href="{{ route('comics.show', ['comic' => $comic->id]) }}" class="btn btn-outline-primary">
-                            Look at me!
+                            Look at me! O.O
                         </a>
 
-                        {{-- modifica il comic --}}
+                        {{-- edit, modifica il comic --}}
                         <a href="{{ route('comics.edit', ['comic' => $comic->id]) }}" class="btn btn-outline-warning">
-                            Edit me!
+                            Edit me! :P
                         </a>
+
+                        {{-- destroy, elimina il comic --}}
+                        <form 
+                            {{-- doppia conferma --}}
+                            onsubmit="return confirm('Are you sure you want to delete this comic?')"
+                            
+                            action="{{ route('comics.destroy', ['comic' => $comic->id]) }}" method="POST" class="d-inline-block">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-outline-danger">
+                                Delete me. ):
+                            </button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
